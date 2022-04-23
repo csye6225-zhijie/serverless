@@ -1,6 +1,5 @@
 package utils;
 
-import java.util.Base64;
 import java.util.Properties;
 import java.util.prefs.BackingStoreException;
 
@@ -138,6 +137,6 @@ public class SendEmailSMTP {
     }
 
 //    public static void main(String[] args) throws Exception {
-//        SendEmailSMTP.send("xjl1997@gmail.com", "testLink");
+//        SendEmailSMTP.send("l445476530@gmail.com", "testLink");
 //    }
 }
