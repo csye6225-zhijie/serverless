@@ -38,6 +38,10 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
           aws-region: ${{ env.AWS_REGION }}
 
+      - name: upload jar and overwrite into S3
+        run: |
+          aws s3 cp target/serverless-1.0-SNAPSHOT.jar s3://lambda.dev.zhijie-li.me
+
       - name: deploy
         run: |
           aws lambda update-function-code --function-name=send_verification_email --zip-file=fileb://target/serverless-1.0-SNAPSHOT.jar
