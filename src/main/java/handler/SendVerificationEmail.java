@@ -13,12 +13,6 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
 import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 
 import utils.SendEmailSMTP;
-
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.internet.*;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
@@ -69,9 +63,9 @@ public class SendVerificationEmail implements RequestHandler<SNSEvent, Object> {
             context.getLogger().log("No Valid Token Found");
             return null;
         }
-//        Sample verificaiton link
-//        http://prod.domain.tld/v1/verifyUserEmail?email=user@example.com&token=sometoken
-        String verificationLink = "https://prod.domain.tldA/v1/verifyUserEmail?email=" + Base64.getEncoder().withoutPadding().encodeToString(userEmail.getBytes(StandardCharsets.UTF_8)) + "&token=" + token;
+//        Sample verification link
+//        http://prod.domain.tld/v1/verifyUserEmail?email=user@example.com&token=sometoken Base64.getEncoder().withoutPadding().encodeToString(userEmail.getBytes(StandardCharsets.UTF_8))
+        String verificationLink = "http://localhost:8080/v1/verifyUserEmail?email=" + userEmail + "&token=" + token;
         context.getLogger().log("Verification Link: " + verificationLink);
         String recipient = userEmail;
         context.getLogger().log("recipient email " + recipient);
