@@ -44,6 +44,5 @@ jobs:
 
       - name: deploy
         run: |
-#          aws lambda update-function-code --function-name=send_verification_email --zip-file=fileb://target/serverless-1.0-SNAPSHOT.jar
           aws lambda update-function-code --function-name=send_verification_email --s3-bucket=lambda.dev.zhijie-li.me --s3-key=serverless-1.0-SNAPSHOT.jar
 
