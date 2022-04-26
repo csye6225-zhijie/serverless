@@ -77,23 +77,23 @@ public class SendVerificationEmail implements RequestHandler<SNSEvent, Object> {
             context.getLogger().log("Item SendRecord is " + sendRecord);
 //            String sendStatus = sendRecord.getString("status");
 //            context.getLogger().log("Send Status is " + sendStatus);
-            if (sendRecord == null) {
-                Item newSendRecord = new Item().withPrimaryKey("userEmail",recipient)
-                        .withString("status","send");
-                try{
-                    PutItemOutcome outcome = table.putItem(newSendRecord);
-                    context.getLogger().log("PutItemOutcome is " + outcome);
-                } catch (Exception e) {
-                    context.getLogger().log("Put Item Exception " + e.getMessage());
-                }
+//            if (sendRecord == null) {
+//                Item newSendRecord = new Item().withPrimaryKey("userEmail",recipient)
+//                        .withString("status","send");
+//                try{
+//                    PutItemOutcome outcome = table.putItem(newSendRecord);
+//                    context.getLogger().log("PutItemOutcome is " + outcome);
+//                } catch (Exception e) {
+//                    context.getLogger().log("Put Item Exception " + e.getMessage());
+//                }
                 try {
                     SendEmailSMTP.send(recipient,verificationLink);
                 } catch (Exception e) {
                     context.getLogger().log("Send Email Exception " + e.getMessage());
                 }
-            } else {
-                return null;
-            }
+//            } else {
+//                return null;
+//            }
         } catch (Exception e) {
             context.getLogger().log("No Send Record Found!");
         }
