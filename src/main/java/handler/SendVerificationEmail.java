@@ -41,7 +41,7 @@ public class SendVerificationEmail implements RequestHandler<SNSEvent, Object> {
             context.getLogger().log("No Message Attributes Found");
             return null;
         }
-
+        context.getLogger().log("record: " + records);
         SNSEvent.MessageAttribute userEmailMessageAttribute = records.get("userEmail");
         if (userEmailMessageAttribute == null) {
             context.getLogger().log("No User Email Found");
