@@ -15,19 +15,19 @@ public class SendEmailSMTP {
 
     // Replace sender@example.com with your "From" address.
     // This address must be verified.
-    static final String FROM = "";
-    static final String FROMNAME = "";
+    static final String FROM = "no-reply@dev.zhijie-li.me";
+    static final String FROMNAME = "Zhijie Li";
 
     // Replace recipient@example.com with a "To" address. If your account
     // is still in the sandbox, this address must be verified.
 //    static final String TO = "recipient@example.com";
 
     // Replace smtp_username with your Amazon SES SMTP user name.
-    static final String SMTP_USERNAME = "";
+    static final String SMTP_USERNAME = "AKIAXLSQV7Y37GSO2GHY";
 
     // Replace smtp_password with your Amazon SES SMTP password.
 
-    static final String SMTP_PASSWORD = "";
+    static final String SMTP_PASSWORD = "BDdsZXBPjkUqucEnx4hnDSfYQehJUkl7vPxZQyuSHlyY";
 
     // The name of the Configuration Set to use for this message.
     // If you comment out or remove this variable, you will also need to
@@ -136,7 +136,7 @@ public class SendEmailSMTP {
         }
     }
 
-//    public static void main(String[] args) throws Exception {
-//        SendEmailSMTP.send("l445476530@gmail.com", "testLink");
-//    }
+    public static void main(String[] args) throws Exception {
+        SendEmailSMTP.send("l445476530@gmail.com", "testLink");
+    }
 }

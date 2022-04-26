@@ -21,10 +21,9 @@ import java.util.*;
 
 public class SendVerificationEmail implements RequestHandler<SNSEvent, Object> {
 
-    //    private DynamoDbClient dynamoDbClient = DynamoDbClient.builder().region(Region.US_EAST_1).build();
     private Regions REGION = Regions.US_EAST_1;
     private DynamoDB dynamoDB;
-    private final String tableName = "useremail_status";
+    private final String tableName = "UserToken";
 
     public Object handleRequest(SNSEvent snsEvent, Context context) {
         //TODO:here we send the email with verification token
@@ -43,7 +42,7 @@ public class SendVerificationEmail implements RequestHandler<SNSEvent, Object> {
             return null;
         }
 
-        SNSEvent.MessageAttribute userEmailMessageAttribute = records.get("UserEmail");
+        SNSEvent.MessageAttribute userEmailMessageAttribute = records.get("userEmail");
         if (userEmailMessageAttribute == null) {
             context.getLogger().log("No User Email Found");
             return null;
@@ -53,7 +52,7 @@ public class SendVerificationEmail implements RequestHandler<SNSEvent, Object> {
             context.getLogger().log("No Valid User Email Found");
             return null;
         }
-        SNSEvent.MessageAttribute tokenMessageAttribute = records.get("Token");
+        SNSEvent.MessageAttribute tokenMessageAttribute = records.get("token");
         if (tokenMessageAttribute == null) {
             context.getLogger().log("No Token Found");
             return null;
@@ -71,20 +70,15 @@ public class SendVerificationEmail implements RequestHandler<SNSEvent, Object> {
         context.getLogger().log("recipient email " + recipient);
 
         // do dynamo check
-//        context.getLogger().log("Start build DynamoUtil");
-//        DynamoUtil dynamoUtil = new DynamoUtil();
-//        context.getLogger().log("Build DynamoUtil Success");
-//        Map<String, AttributeValue> returnedItem = getDynamoDBItem("useremail", recipient);
-//        context.getLogger().log("Dynamo returnedItem is " + returnedItem);
         Table table = dynamoDB.getTable(tableName);
         context.getLogger().log("Dynamo Table is " + table);
         try {
-            Item sendRecord = table.getItem("useremail", recipient);
+            Item sendRecord = table.getItem("userEmail", recipient);
             context.getLogger().log("Item SendRecord is " + sendRecord);
 //            String sendStatus = sendRecord.getString("status");
 //            context.getLogger().log("Send Status is " + sendStatus);
             if (sendRecord == null) {
-                Item newSendRecord = new Item().withPrimaryKey("useremail",recipient)
+                Item newSendRecord = new Item().withPrimaryKey("userEmail",recipient)
                         .withString("status","send");
                 try{
                     PutItemOutcome outcome = table.putItem(newSendRecord);
