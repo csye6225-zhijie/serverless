@@ -65,7 +65,7 @@ public class SendVerificationEmail implements RequestHandler<SNSEvent, Object> {
         }
 //        Sample verification link
 //        http://prod.domain.tld/v1/verifyUserEmail?email=user@example.com&token=sometoken Base64.getEncoder().withoutPadding().encodeToString(userEmail.getBytes(StandardCharsets.UTF_8))
-        String verificationLink = "http://localhost:8080/v1/verifyUserEmail?email=" + userEmail + "&token=" + token;
+        String verificationLink = "http://dev.zhijie-li.me/v1/verifyUserEmail?email=" + userEmail + "&token=" + token;
         context.getLogger().log("Verification Link: " + verificationLink);
         String recipient = userEmail;
         context.getLogger().log("recipient email " + recipient);
